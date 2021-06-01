@@ -21,12 +21,12 @@
     plotProps;
 
   let svg;
-  let width = 500;
-  let height = 200;
+  let width = 400;
+  let height = 300;
 
   const padding = { top: 25, right: 15, bottom: 45, left: 50 };
 
-  $: xTicks = [0, 1, 2, 3, 4, 5, 6];
+  $: xTicks = [0, 1, 2, 3, 4, 5];
 
   $: yTicks = height > 180 ? [-4, -3, -2, -1, 0, 1, 2, 3, 4] : [-4, 0, 4];
 
@@ -38,8 +38,8 @@
     .domain([minY, maxY])
     .range([height - padding.bottom, padding.top]);
 
-  $: minX = 0; // xs[0];
-  $: maxX = 6; // xs[xs.length - 1];
+  $: minX = xs[0];
+  $: maxX = xs[xs.length - 1];
   $: minY = Math.min.apply(null, yTicks);
   $: maxY = Math.max.apply(null, yTicks);
 
@@ -141,16 +141,15 @@
 <div id="container">
   <div
     class="label"
-    style="bottom: 2px; left: {xScale((minX + maxX) / 2) - 5}px;"
+    style="bottom: 2px; left: {xScale((minX + maxX) / 2) + 5}px;"
   >
-    <Katex math="x" />
+    <Katex math="t" />
   </div>
   <div
     class="label"
-    style="bottom: {yScale((minY + maxY) / 2) + 10}px; left: {xScale(0) -
-      50}px; transform: rotate(-90deg);"
+    style="bottom: {yScale(minY) - 10}px; left: {xScale(0) + 10}px;"
   >
-    <Katex math="f(\cdot)" />
+    <Katex math="X(t)" />
   </div>
 
   <svg

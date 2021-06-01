@@ -7,16 +7,16 @@ const paramVariance = {
   formula: "\\sigma^2",
   value: 1.0,
   min: 0.0,
-  max: 4.0,
+  max: 2.0,
   step: 0.01,
   lowerBound: 0.0,
 };
 const paramLengthscale = {
   name: "lengthscale",
   formula: "\\ell",
-  value: 1.0,
+  value: 0.5,
   min: 0.05,
-  max: 10.0,
+  max: 1.5,
   step: 0.01,
   lowerBound: 1e-3,
 };
@@ -31,8 +31,8 @@ export function sqexp(variance = 1, lengthscale = 1) {
 
 export function makeSqexp() {
   return {
-    description: "squared-exponential",
-    formula: "\\sigma^2 \\exp\\Big(-\\frac{(x-x')^2}{2\\ell^2}\\Big)",
+    description: "Squared-exponential",
+    formula: "\\sigma^2 \\exp\\Big(-\\frac{(s-t)^2}{2\\ell^2}\\Big)",
     parameters: [paramVariance, paramLengthscale],
     kernel: sqexp,
   };
@@ -47,8 +47,8 @@ export function matern12(variance = 1, lengthscale = 1) {
 
 export function makeMatern12() {
   return {
-    description: "exponential (Matérn 1/2)",
-    formula: "\\sigma^2 \\exp\\Big(-\\frac{|x-x'|}{\\ell}\\Big)",
+    description: "Matérn 1/2 (Exponential)",
+    formula: "\\sigma^2 \\exp\\Big(-\\frac{|s-t|}{\\ell}\\Big)",
     parameters: [paramVariance, paramLengthscale],
     kernel: matern12,
   };
@@ -92,9 +92,18 @@ export function makeMatern52() {
   };
 }
 
-export function white(variance) {
+export function white(variance = 1) {
   return (x1, x2) => {
-    return x1 == x2 ? variance : 0.0;
+    return x1 === x2 ? variance : 0.0;
+  };
+}
+
+export function makeWhite() {
+  return {
+    description: "White Noise",
+    formula: "\\sigma^2 \\mathbb{1}\\{s=t\\}",
+    parameters: [paramVariance],
+    kernel: white,
   };
 }
 

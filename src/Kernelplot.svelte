@@ -11,15 +11,15 @@
   export let xs, k1s, k2s, atX1, atX2;
 
   let svg;
-  let width = 500;
-  let height = 200;
+  let width = 400;
+  let height = 300;
 
   const padding = { top: 25, right: 15, bottom: 40, left: 50 };
 
-  $: xTicks = [0, 1, 2, 3, 4, 5, 6];
+  $: xTicks = [0, 1, 2, 3, 4, 5];
 
   // TODO add negative y-ticks when conditioning
-  $: yTicks = height > 180 ? [-1, -0.5, 0, 0.5, 1] : [-1, 0, 1];
+  $: yTicks = height > 180 ? [-0.5, 0, 0.5, 1, 1.5, 2] : [-0.5, 0, 1];
 
   $: xScale = scaleLinear()
     .domain([minX, maxX])
@@ -74,17 +74,16 @@
 
 <div id="container">
   <div class="label" style="bottom: 2px; left: {xScale($x1) - 5}px;">
-    <Katex math="x_1" />
+    <Katex math="s" />
   </div>
   <div class="label" style="bottom: 2px; left: {xScale($x2) - 5}px;">
-    <Katex math="x_2" />
+    <Katex math="t" />
   </div>
   <div
     class="label"
-    style="bottom: {yScale((minY + maxY) / 2)}px; left: {xScale(0) -
-      60}px; transform: rotate(-90deg);"
+    style="bottom: {yScale(minY) - 15}px; left: {xScale(0) + 10}px;"
   >
-    <Katex math="k(x_i, \cdot)" />
+    <Katex math="\sigma(s, \cdot) = E[X(s)X(\cdot)]" />
   </div>
 
   <svg
@@ -111,21 +110,13 @@
 
     <!-- data -->
     <path class="path-line" style="stroke: red;" d={path1} />
-    <path class="path-line" style="stroke: orange;" d={path2} />
     <circle style="fill: red;" cx={xScale($x1)} cy={yScale(atX1.k1)} r="3" />
-    <circle
-      style="fill: orange; stroke: red;"
-      cx={xScale($x1)}
-      cy={yScale(atX1.k2)}
-      r="3"
-    />
     <circle
       style="fill: red; stroke: orange;"
       cx={xScale($x2)}
       cy={yScale(atX2.k1)}
       r="3"
     />
-    <circle style="fill: orange;" cx={xScale($x2)} cy={yScale(atX2.k2)} r="3" />
   </svg>
 </div>
 

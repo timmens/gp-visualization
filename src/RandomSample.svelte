@@ -5,7 +5,7 @@
   import { vs, us } from "./store.js";
   export let xsLength, doAnimate;
 
-  let numSamples = 3;
+  let numSamples = 4;
   let seed1 = 0.1;
   let seed2 = 0.2;
 
@@ -20,8 +20,8 @@
 </script>
 
 <div class="randomize-box">
+  <strong>Number of samples: </strong>
   <label>
-    Number of samples:
     <InputNumberSafely
       bind:value={numSamples}
       min="0"
@@ -31,7 +31,6 @@
       style="width: 50px;"
     />
   </label>
-  <button class="btn" on:click={resampleClick}>Resample</button>
   <button
     class="btn"
     on:click={(_event) => {

@@ -8,7 +8,7 @@
     name: "standard deviation",
     formula: "\\sigma_\\text{noise}",
     min: 0.0,
-    max: 4.0,
+    max: 2.0,
     step: 0.01,
     lowerBound: 0.0,
   };
@@ -26,26 +26,13 @@
       </option>
     {/each}
   </select>
-  <Katex math="k(x, x') = {selectedKernel.formula}" />
+  <span style="display:inline-block; width: 10px;"></span>
+  <Katex math="\sigma(s, t) = {selectedKernel.formula}" />
 
   {#each selectedKernel.parameters as parameter}
     <ParameterSlider bind:value={parameter.value} {...parameter} />
   {/each}
 
-  <strong>Likelihood:</strong>
-  <label
-    ><input type="radio" bind:group={useLikelihood} value={false} />noise-free
-    observations</label
-  >
-  <label
-    ><input type="radio" bind:group={useLikelihood} value={true} />observations
-    with Gaussian noise, <Katex
-      math={"p(y\\, | \\,f(x)) = \\mathcal{N}(f(x), \\sigma_\\text{noise}^2)"}
-    /></label
-  >
-  {#if useLikelihood}
-    <ParameterSlider bind:value={noiseScaleInternal} {...noiseScaleProps} />
-  {/if}
 </div>
 
 <style>
