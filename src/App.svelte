@@ -147,7 +147,9 @@
 
   <div class="footer">
     <em>
-      Adjusted by Tim Mensinger &mdash Copyright (c) 2021 ST John [
+      Adjusted by Tim Mensinger
+      [<a href="https://github.com/timmens/gp-visualization">GitHub</a>]
+      &mdash Copyright (c) 2021 ST John [
       <a href="https://github.com/st--/interactive-gp-visualization/"
         >Original source on GitHub</a
       >
