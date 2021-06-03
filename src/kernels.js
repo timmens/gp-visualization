@@ -14,9 +14,9 @@ const paramVariance = {
 const paramLengthscale = {
   name: "lengthscale",
   formula: "\\ell",
-  value: 0.5,
+  value: 0.2,
   min: 0.05,
-  max: 1.5,
+  max: 1,
   step: 0.01,
   lowerBound: 1e-3,
 };
@@ -104,6 +104,21 @@ export function makeWhite() {
     formula: "\\sigma^2 \\mathbb{1}\\{s=t\\}",
     parameters: [paramVariance],
     kernel: white,
+  };
+}
+
+export function brownianMotion() {
+  return (x1, x2) => {
+    return Math.min(x1, x2);
+  };
+}
+
+export function makeBrownianMotion() {
+  return {
+    description: "Brownian Motion",
+    formula: "\\min(s, t)",
+    parameters: [],
+    kernel: brownianMotion,
   };
 }
 

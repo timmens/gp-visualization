@@ -15,6 +15,7 @@
     makeSqexp,
     makeMatern12,
     makeWhite,
+    makeBrownianMotion,
     sumKernel,
   } from "./kernels.js";
   import {
@@ -31,6 +32,7 @@
     makeMatern12(), // 0
     makeSqexp(), // 1
     makeWhite(), // 2
+    makeBrownianMotion(), //3
   ];
   let selectedKernel = kernelChoices[1]; // = Sqexp
   let noiseScale = 0.0;
