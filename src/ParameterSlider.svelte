@@ -21,6 +21,6 @@
 <style>
   label {
     max-width: 500px;
-    text-align: center
+    text-align: center;
   }
 </style>

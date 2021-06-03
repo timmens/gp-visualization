@@ -1,11 +1,8 @@
 <!-- Copyright (c) 2021 ST John -->
-
 <script lang="ts">
-  import Katex from "./Katex.svelte";
   import Lineplot from "./Lineplot.svelte";
   import Kernelplot from "./Kernelplot.svelte";
   import CovMat from "./CovMat.svelte";
-  import Covariance from "./Covariance.svelte";
   import RandomSample from "./RandomSample.svelte";
   import ConfigData from "./ConfigData.svelte";
   import { x1, x2, vs, us } from "./store.js";
@@ -21,7 +18,6 @@
   import {
     linspace,
     matrixSqrt,
-    sampleMvn,
     sampleMvnTrajectory,
     covEllipse,
   } from "./mymath.js";
@@ -38,7 +34,6 @@
   let noiseScale = 0.0;
 
   let doAnimate = true;
-  let useLikelihood = false;
 
   let plotProps = {
     mean: true,
@@ -47,7 +42,7 @@
     marginals: false,
   };
 
-  let num_grid = 150;
+  let num_grid = 200;
   $: xs = linspace(0, 5, num_grid);
 
   $: kernelWithJitter = sumKernel([
@@ -74,7 +69,6 @@
   $: marginalVariances = covMat.diag();
   $: covSqrt = matrixSqrt(covMat);
 
-  //$: samples = sampleMvn(means, covSqrt, $vs);
   let frameIdx = 0;
   let numFrames = 30;
   $: sampleFrames = sampleMvnTrajectory(means, covSqrt, $vs, $us, numFrames);
@@ -120,7 +114,7 @@
 <div>
   <h1 class="post-title">Gaussian Process Visualization</h1>
   <span style="display:block; margin-top:-20px;">
-  Topics in Econometrics and Statistics, Summer term 2021, Tim Mensinger
+    Topics in Econometrics and Statistics, Summer term 2021, Tim Mensinger
   </span>
 
   <div>
@@ -144,7 +138,7 @@
   </div>
 
   <div>
-    <ConfigData bind:selectedKernel {kernelChoices} />
+    <ConfigData bind:noiseScale bind:selectedKernel {kernelChoices} />
   </div>
 
   <div>
@@ -153,14 +147,13 @@
 
   <div class="footer">
     <em>
-    Adjusted by Tim Mensinger &mdash Copyright (c) 2021 ST John [
-    <a href="https://github.com/st--/interactive-gp-visualization/"
-      >Original source on GitHub</a
-    >
-    ]
+      Adjusted by Tim Mensinger &mdash Copyright (c) 2021 ST John [
+      <a href="https://github.com/st--/interactive-gp-visualization/"
+        >Original source on GitHub</a
+      >
+      ]
     </em>
   </div>
-
 </div>
 
 <style>
@@ -175,7 +168,6 @@
   }
   .chart {
     min-width: 90%;
-    /* background-color: #fafafa; */
   }
 
   .footer {
@@ -185,5 +177,4 @@
     width: 100%;
     text-align: center;
   }
-
 </style>

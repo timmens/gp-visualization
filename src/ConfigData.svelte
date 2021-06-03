@@ -26,13 +26,12 @@
       </option>
     {/each}
   </select>
-  <span style="display:inline-block; width: 10px;"></span>
+  <span style="display:inline-block; width: 10px;" />
   <Katex math="\sigma(s, t) = {selectedKernel.formula}" />
 
   {#each selectedKernel.parameters as parameter}
     <ParameterSlider bind:value={parameter.value} {...parameter} />
   {/each}
-
 </div>
 
 <style>
