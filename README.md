@@ -5,6 +5,11 @@ can be found [here](https://github.com/st--/interactive-gp-visualization). For f
 questions see the LICENSE.
 
 
+## Preview
+
+Preview the app here https://gp-visualization-timmens.vercel.app/
+
+
 ## Get started
 
 Here I only show how to use the app in your browser. For a more detailed description
